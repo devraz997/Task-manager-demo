@@ -1,7 +1,7 @@
-import { Undo2, Redo2, Settings } from 'lucide-react';
+import { Undo2, Redo2 } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
 
-export function Header({ devMode, toggleDevMode }: { devMode: boolean, toggleDevMode: () => void }) {
+export function Header() {
   const eventLog = useAppStore(state => state.eventLog);
   const cursor = useAppStore(state => state.cursor);
   const undo = useAppStore(state => state.undo);
@@ -36,19 +36,7 @@ export function Header({ devMode, toggleDevMode }: { devMode: boolean, toggleDev
         </button>
       </div>
 
-      <div>
-        <button 
-          className="primary-btn" 
-          style={{ 
-            background: devMode ? 'var(--accent-orange)' : 'var(--bg-panel-hover)',
-            color: devMode ? '#fff' : 'var(--text-primary)'
-          }}
-          onClick={toggleDevMode}
-        >
-          <Settings size={18} />
-          Dev Mode
-        </button>
-      </div>
+      <div />
     </header>
   );
 }

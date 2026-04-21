@@ -141,15 +141,15 @@ export function reconcileAction(state: AppState, action: EngineAction): AppState
         previousState: { ...task }
       });
 
-      // Cascade delete to children (TOMBSTONE)
-      const children = findDescendants(action.id, currentTasks);
+      // Promote immediate children to root (DETACH)
+      const children = Array.from(currentTasks.values()).filter(t => t.parentId === action.id);
       for (const child of children) {
         eventsToAppend.push({
           id: uuidv4(),
-          type: 'TASK_TOMBSTONED',
+          type: 'TASK_DETACHED',
           timestamp: now,
-          actionLabel: `Auto-removed '${child.title}' (cascade)`,
-          payload: { id: child.id, status: 'tombstoned' },
+          actionLabel: `Promoted '${child.title}' to root (parent deleted)`,
+          payload: { id: child.id, parentId: null },
           intent: { reason: 'cascade_from_parent', sourceEventId: rootEventId },
           causedBy: rootEventId,
           previousState: { ...child }
@@ -166,12 +166,3 @@ export function reconcileAction(state: AppState, action: EngineAction): AppState
   };
 }
 
-function findDescendants(parentId: string, tasks: Map<string, Task>): Task[] {
-  const result: Task[] = [];
-  const children = Array.from(tasks.values()).filter(t => t.parentId === parentId && t.status !== 'tombstoned');
-  for (const child of children) {
-    result.push(child);
-    result.push(...findDescendants(child.id, tasks));
-  }
-  return result;
-}
