@@ -14,7 +14,7 @@ export function Header() {
     <header className="app-header">
       <div style={{ display: 'flex', alignItems: 'flex-baseline', gap: '1rem' }}>
         <h1 style={{ fontSize: '1.25rem', fontWeight: 700 }}>TaskTime</h1>
-        <span style={{ color: 'var(--text-muted)' }}>Event-Sourced Task Manager</span>
+        <span className="tagline" style={{ color: 'var(--text-muted)' }}>Event-Sourced Task Manager</span>
       </div>
 
       <div style={{ display: 'flex', gap: '0.5rem' }}>
