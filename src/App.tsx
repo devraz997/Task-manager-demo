@@ -1,7 +1,7 @@
-import { TimelineSlider } from './components/TimelineSlider';
-import { Header } from './components/Header';
-import { TaskTreePanel } from './components/TaskTree/TaskTreePanel';
-import { HistoryLogPanel } from './components/Panels/HistoryLogPanel';
+import { TimelineSlider } from './components/TimelineSlider.tsx';
+import { Header } from './components/Header.tsx';
+import { TaskTreePanel } from './components/TaskTree/TaskTreePanel.tsx';
+import { HistoryLogPanel } from './components/Panels/HistoryLogPanel.tsx';
 
 export function App() {
 
